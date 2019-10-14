@@ -39,11 +39,18 @@ var background_params = {
   green_channel: 100
 };
 
+// background & controllers
 var background_color = myColor;
 var background_color_string = background_color.toString();
 var controllers = [];
 var tick = 0;
 var turn_num = 0;
+
+// button
+var button_w = 6*U_SCALE;
+var button_h = 2*U_SCALE;
+let button_x_left_end = w/2 - button_w/2;
+let button_y_upper_end = h-button_h-U_SCALE;
 
 function setup() {
   cnv = createCanvas(w, h);
@@ -135,17 +142,15 @@ function draw() {
   color_x += color_speed;
 }
 
-function mouseClicked() {
-  // background_color = color(30*random(8), 80*random(2), 80*random(2));
-  // background_color = color('hsb(' + 30 * random(8) + "," + 100 * random(1) + "%," + 50 + "%)");
-  // background_color_string = background_color.toString();
-
-  // document.body.style.backgroundColor = background_color_string;
-}
-
 function canvasClicked() {
   for (let i=0; i<controllers.length; i++) {
     controllers[i].hide();
+  }
+
+  if (button_x_left_end <= mouseX && mouseX <= button_x_left_end+button_w
+    && button_y_upper_end <= mouseY && mouseY <= button_y_upper_end+button_h) {
+    save(cnv, 'unet.png');
+    return;
   }
 
   if (u1.clicked(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y)
@@ -153,7 +158,9 @@ function canvasClicked() {
     return;
   } else {
     if(background_controller.on==false) {
-      background_controller.setPosition(mouseX, mouseY);
+      // TODO: adjust controller positions
+      // Just hard coded the positions for the sake of time.
+      background_controller.setPosition(mouseX+U_SCALE, mouseY+U1_OFFSET_Y-U_SCALE*2);
       background_controller.show();
       background_controller.on = true;
     } else {
@@ -175,9 +182,6 @@ function toRgbString(r, g, b) {
   return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
-
-
-
 function multiplierToRgb(multiplier) {
   return Math.floor(multiplier / 200 * 255);
 }
@@ -194,19 +198,14 @@ function setBackgroundColor() {
 
 // button helpers
 function buttonDisplay() {
-  var button_w = 6*U_SCALE;
-  var button_h = 2*U_SCALE;
-  let x_left_end = w/2 - button_w/2;
-  let y_upper_end = h-button_h-U_SCALE;
-
   strokeWeight(6);
   fill('blue');
-  rect(x_left_end, y_upper_end, button_w, button_h);
+  rect(button_x_left_end, button_y_upper_end, button_w, button_h);
 
   noStroke();
   textAlign(CENTER);
   textStyle(ITALIC);
   fill('white');
   textSize(24);
-  text("make video", w/2, y_upper_end+button_h/2+9);
+  text("make video", w/2, button_y_upper_end+button_h/2+9);
 }
