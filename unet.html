@@ -6,8 +6,13 @@
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
     <title>UGly-Net</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link href="css/business-casual.css" rel="stylesheet">  
 
     <script src="./libraries/p5.min.js"></script>
     <script src="./libraries/dat.gui.js"></script>
@@ -27,7 +32,7 @@
     </div>
 
     <div id="upload">
-      <form action="upload_process.php?style=&type=" id="uploadForm" method= "post" enctype= "multipart/form-data">
+      <form action="upload_process.php?style=&type=" id="uploadForm" method= "post" enctype= "multipart/form-data" name="videoform">
         <div class="row">
           <div class="col-md-12 col-xs-12 fh5co-project animate-box" data-animate-effect="fadeIn">
             <div class="wrapper">
@@ -61,6 +66,7 @@
       <br/><br/>*******<br/>
     </div> -->
 
+    <button id="video-btn" onclick="buttonOnClick()" class="custom-button" style="z-index:5"><i>Make Video<i></button>
   </body>
 
   <script src="./javascript/sketch.js"></script>
@@ -70,5 +76,10 @@
   <script src="./javascript/Circle.js"></script>
   <script src="./javascript/SkpCon.js"></script>
   <script src="./javascript/Latent.js"></script>
+  <script>
+    function buttonOnClick() {
+      location.href='gallery.html';
+    }
+  </script>
 
 </html>

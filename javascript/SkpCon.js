@@ -12,20 +12,25 @@ class SkpCon {
 
 		this.click_dist = 0.6*U_SCALE;
 		// this.skp_gap = 2.5*U_SCALE;
-		this.default_strokeWgt = 10;
+		this.default_strokeWgt = 1;
+		this.default_strokeWgt_outer = 6;
 		this.strokeWgt = 1;
 		this.strokeWgt_outer = 6;
+		this.c = color("red");
 
 		// controller
 		this.controller_options = {
 			options: operations_skpcn,
 			val: 100
 		}
-		this.controller = createGui(window, "skip connections", "QuickSettings");
-		this.controller.addObject(this.controller_options);
+		let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
+		this.controller = createGui(window, "원본 프레임의 모습을 그대로 전달하는 Skip Connection", "QuickSettings");
+		this.controller.addObject(this.controller_options, controller_labeltexts);
 		this.controller_options.options = random(operations_skpcn);
 		controllers.push(this.controller);
 		this.controller.on = false;
+
+		this.refreshColor();
 	}
 
 	display() {
@@ -37,15 +42,12 @@ class SkpCon {
 		}
 
 		// color
-		var c = color(toHsbString( operations_skpcn.indexOf(this.controller_options.options) * 150,
-									100,
-									this.controller_options.val*0.5+50));
 		noFill();
 
 		// draw skip connections
 	    for (var i=0; i<5; i++) {
 	    	// outer glimpse
-	    	stroke(c);
+	    	stroke(this.c);
 	    	strokeCap(SQUARE);
 	    	strokeWeight(this.strokeWgt_outer);
 			beginShape(LINES);
@@ -98,5 +100,29 @@ class SkpCon {
 				return true;
 			} 
 		}
+	}
+
+	hovered(mX, mY) {
+		for (var i=0; i<5; i++) {
+			var y = this.encoder_traits[i][1] - 0.4*U_SCALE;
+			if(this.encoder_traits[i][0] <= mX && mX <= this.decoder_traits[i][0]
+				&& y-this.click_dist <= mY && mY <= y+this.click_dist) {
+				this.c = color('rgb(0,0,255)');
+				this.strokeWgt = 3;
+				this.strokeWgt_outer = 8;
+				return true;
+			} else {
+				this.refreshColor();
+				this.strokeWgt = this.default_strokeWgt;
+				this.strokeWgt_outer = this.default_strokeWgt_outer;
+			}
+		}
+		return false;
+	}
+
+	refreshColor() {
+		this.c = color(toHsbString( operations_skpcn.indexOf(this.controller_options.options) * 150,
+									100,
+									this.controller_options.val*0.5+50));
 	}
 }

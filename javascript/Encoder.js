@@ -16,14 +16,14 @@ class Encoder {
 		this.strokeWeight = default_strokeWgt;
 
 		// controller
-		this.controller_options = {
-			options: operations,
-			val: 100
-		}
-		this.controller = createGui(window, "encoder", "QuickSettings");
-		this.controller.addObject(this.controller_options);
-		this.controller_options.options = random(operations);
-		controllers.push(this.controller);
+		// this.controller_options = {
+		// 	options: operations,
+		// 	val: 100
+		// }
+		// this.controller = createGui(window, "encoder", "QuickSettings");
+		// this.controller.addObject(this.controller_options);
+		// this.controller_options.options = random(operations);
+		// controllers.push(this.controller);
 	}
 
 	display() {

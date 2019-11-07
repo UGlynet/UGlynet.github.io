@@ -18,19 +18,21 @@ class Latent {
 			options: operations,
 			val: 50,
 		}
-		this.controller = createGui(window, "bottleneck layer", "QuickSettings");
-		this.controller.addObject(this.controller_options);
-		this.controller_options.options = random(operations);
+		let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
+		this.controller = createGui(window, "비디오 프레임이 응축된 Bottleneck 레이어", "QuickSettings");
+		this.controller.addObject(this.controller_options, controller_labeltexts);
+		controller_options.push(this.controller_options);
 		controllers.push(this.controller);
 		this.controller.on = false;
+
+		this.refreshColor();
 	}	
 
 	display() {
-		this.c = color(toHsbString(hue_palette[ operations.indexOf(this.controller_options.options) ],
-									100,
-									this.controller_options.val*0.5+50));
+		// this.refreshColor();
 		fill(this.c);
 
+		strokeWeight(this.strokeWeight);
 		beginShape();
 		var r = this.radius;
 
@@ -61,13 +63,21 @@ class Latent {
 		}
 	}
 
+	hovered(mX, mY) {
+		if( sq(mX-this.center_x) + sq((mY-this.center_y)*1.5) <= sq(1.5*this.radius+0.2*this.U_SCALE) ) {
+			this.c = color('rgb(0,0,255)');
+			this.strokeWeight = 12;
+			return true;
+		} else {
+			this.refreshColor();
+			this.strokeWeight = this.default_strokeWgt;
+			return false;
+		}
+	}
 
-
-	// hover_in(mX, mY) {
-	// 	if( sq(mX-this.center_x) + sq((mY-this.center_y)*1.5) <= sq(1.5*this.radius+0.2*this.U_SCALE) ) {
-	// 		this.strokeWeight = default_strokeWgt;
-	// 		return true;
-	// 	}
-	// }
-
+	refreshColor() {
+		this.c = color(toHsbString(hue_palette[ operations.indexOf(this.controller_options.options) ],
+									100,
+									this.controller_options.val*0.5+50));
+	}
 }

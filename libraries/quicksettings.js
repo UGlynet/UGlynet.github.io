@@ -689,12 +689,12 @@
          * @param [callback] {Function} A callback function that will be called when the value of this control changes.
          * @returns {module:QuickSettings}
          */
-        addBoolean: function (title, value, callback) {
+        addBoolean: function (title, value, labeltext, callback) {
             var container = this._createContainer();
 
             var id = getNextID();
             var label = createElement("label", null, "qs_checkbox_label", container);
-            label.textContent = title;
+            label.textContent = labeltext;
             label.setAttribute("for", id);
 
             var checkbox = createElement("label", null, "qs_checkbox", container);
@@ -735,8 +735,8 @@
          * @param object {Object} Object the control is bound to. When the value of the control changes, a property on this object, with the name of the title of this control, will be set to the current value of this control.
          * @returns {module:QuickSettings}
          */
-        bindBoolean: function (title, value, object) {
-            return this.addBoolean(title, value, function (value) {
+        bindBoolean: function (title, value, labeltext, object) {
+            return this.addBoolean(title, value, labeltext, function (value) {
                 object[title] = value;
             });
         },
@@ -785,12 +785,12 @@
          * @param [callback] {Function} Callback that will be called when the value of this control changes.
          * @returns {module:QuickSettings}
          */
-        addColor: function (title, color, callback) {
+        addColor: function (title, color, labeltext, callback) {
             if (isSafari() || isEdge() || isIE()) {
                 return this.addText(title, color, callback);
             }
             var container = this._createContainer();
-            var label = createLabel("<b>" + title + ":</b> " + color, container);
+            var label = createLabel("<b>" + labeltext + ":</b> " + color, container);
             var id = getNextID();
             var colorInput = createInput("color", id, "qs_color", container);
             colorInput.value = color || "#ff0000";
@@ -804,13 +804,14 @@
                 colorLabel: colorLabel,
                 label: label,
                 title: title,
+                labeltext: labeltext,
                 getValue: function () {
                     return this.control.value;
                 },
                 setValue: function (value) {
                     this.control.value = value;
                     this.colorLabel.style.backgroundColor = colorInput.value;
-                    this.label.innerHTML = "<b>" + this.title + ":</b> " + this.control.value;
+                    this.label.innerHTML = "<b>" + this.labeltext + ":</b> " + this.control.value;
                     if (callback) {
                         callback(value);
                     }
@@ -819,7 +820,7 @@
 
             var self = this;
             colorInput.addEventListener("input", function () {
-                label.innerHTML = "<b>" + title + ":</b> " + colorInput.value;
+                label.innerHTML = "<b>" + labeltext + ":</b> " + colorInput.value;
                 colorLabel.style.backgroundColor = colorInput.value;
                 if (callback) {
                     callback(colorInput.value);
@@ -836,8 +837,8 @@
          * @param object {Object} Object the control is bound to. When the value of the control changes, a property on this object, with the name of the title of this control, will be set to the current value of this control.
          * @returns {module:QuickSettings}
          */
-        bindColor: function (title, color, object) {
-            return this.addColor(title, color, function (value) {
+        bindColor: function (title, color, labeltext, object) {
+            return this.addColor(title, color, labeltext, function (value) {
                 object[title] = value;
             });
         },
@@ -854,7 +855,7 @@
          * @param [callback] {Function} Callback function that will be called when the value of this control changes.
          * @returns {*}
          */
-        addDate: function (title, date, callback) {
+        addDate: function (title, date, labeltext, callback) {
             var dateStr;
             if (date instanceof Date) {
                 var year = date.getFullYear();
@@ -871,7 +872,7 @@
                 return this.addText(title, dateStr, callback);
             }
             var container = this._createContainer();
-            var label = createLabel("<b>" + title + "</b>", container);
+            var label = createLabel("<b>" + labeltext + "</b>", container);
 
             var dateInput = createInput("date", getNextID(), "qs_text_input", container);
             dateInput.value = dateStr || "";
@@ -921,8 +922,8 @@
          * @param object {Object} Object the control is bound to. When the value of the control changes, a property on this object, with the name of the title of this control, will be set to the current value of this control.
          * @returns {*}
          */
-        bindDate: function (title, date, object) {
-            return this.addDate(title, date, function (value) {
+        bindDate: function (title, date, labeltext, object) {
+            return this.addDate(title, date, labeltext, function (value) {
                 object[title] = value;
             });
         },
@@ -939,10 +940,10 @@
          * @param [callback] {Function} Callback function that will be called when a new option is chosen. Callback will be passed an object containing "index", "label", and "value" properties. If the selected item is a simple value, then label and value will be the same.
          * @returns {module:QuickSettings}
          */
-        addDropDown: function (title, items, callback) {
+        addDropDown: function (title, items, labeltext, callback) {
             var container = this._createContainer();
 
-            var label = createLabel("<b>" + title + "</b>", container);
+            var label = createLabel("<b>" + labeltext + "</b>", container);
             var select = createElement("select", null, "qs_select", container);
             for (var i = 0; i < items.length; i++) {
                 var option = createElement("option"),
@@ -1015,8 +1016,8 @@
          * @param object {Object} Object the control is bound to. When the value of the control changes, a property on this object, with the name of the title of this control, will be set to the current value of this control.
          * @returns {module:QuickSettings}
          */
-        bindDropDown: function (title, items, object) {
-            return this.addDropDown(title, items, function (value) {
+        bindDropDown: function (title, items, labeltext, object) {
+            return this.addDropDown(title, items, labeltext, function (value) {
                 object[title] = value.value;
             });
         },
@@ -1182,8 +1183,8 @@
          * @param [callback] {Function} Callback function to call when control value changes.
          * @returns {module:QuickSettings}
          */
-        addRange: function (title, min, max, value, step, callback) {
-            return this._addNumber("range", title, min, max, value, step, callback);
+        addRange: function (title, min, max, value, step, labeltext, callback) {
+            return this._addNumber("range", title, min, max, value, step, labeltext, callback);
         },
 
         /**
@@ -1196,11 +1197,11 @@
          * @param [callback] {Function} Callback function to call when control value changes.
          * @returns {module:QuickSettings}
          */
-        addNumber: function (title, min, max, value, step, callback) {
-            return this._addNumber("number", title, min, max, value, step, callback);
+        addNumber: function (title, min, max, value, step, labeltext, callback) {
+            return this._addNumber("number", title, min, max, value, step, labeltext, callback);
         },
 
-        _addNumber: function (type, title, min, max, value, step, callback) {
+        _addNumber: function (type, title, min, max, value, step, labeltext, callback) {
             var container = this._createContainer();
 
             var label = createLabel("", container);
@@ -1212,7 +1213,7 @@
             input.step = step || 1;
             input.value = value || 0;
 
-            label.innerHTML = "<b>" + title + ":</b> " + input.value;
+            label.innerHTML = "<b>" + labeltext + ":</b> " + input.value;
 
 
             this._controls[title] = {
@@ -1221,12 +1222,13 @@
                 label: label,
                 title: title,
                 callback: callback,
+                labeltext: labeltext,
                 getValue: function () {
                     return parseFloat(this.control.value);
                 },
                 setValue: function (value) {
                     this.control.value = value;
-                    this.label.innerHTML = "<b>" + this.title + ":</b> " + this.control.value;
+                    this.label.innerHTML = "<b>" + this.labeltext + ":</b> " + this.control.value;
                     if (callback) {
                         callback(parseFloat(value));
                     }
@@ -1239,7 +1241,7 @@
             }
             var self = this;
             input.addEventListener(eventName, function () {
-                label.innerHTML = "<b>" + title + ":</b> " + input.value;
+                label.innerHTML = "<b>" + labeltext + ":</b> " + input.value;
                 if (callback) {
                     callback(parseFloat(input.value));
                 }
@@ -1258,8 +1260,8 @@
          * @param object {Object} Object the control is bound to. When the value of the control changes, a property on this object, with the name of the title of this control, will be set to the current value of this control.
          * @returns {module:QuickSettings}
          */
-        bindRange: function (title, min, max, value, step, object) {
-            return this.addRange(title, min, max, value, step, function (value) {
+        bindRange: function (title, min, max, value, step, labeltext, object) {
+            return this.addRange(title, min, max, value, step, labeltext, function (value) {
                 object[title] = value;
             });
         },

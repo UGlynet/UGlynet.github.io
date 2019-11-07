@@ -17,6 +17,7 @@ class Circle {
 		this.order_num = onum;
 
 		this.strokeWeight = default_strokeWgt;
+		this.default_strokeWgt = default_strokeWgt;
 
 		// controller
 		if(activated) {
@@ -24,12 +25,15 @@ class Circle {
 				options: operations,
 				val: 50
 			}
+			let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
 			this.controller = createGui(window, name, "QuickSettings");
-			this.controller.addObject(this.controller_options);
-			this.controller_options.options = random(operations);
+			this.controller.addObject(this.controller_options, controller_labeltexts);
+			controller_options.push(this.controller_options);
 			controllers.push(this.controller);
 			this.controller.on = false;
 		}
+
+		this.refreshColor(onum);
 	}
 
 	display() {
@@ -67,9 +71,22 @@ class Circle {
 		}
 	}
 
+	hovered(mX, mY) {
+		if( sq((mX-this.center_x)*1.1) + sq(mY-this.center_y) <= sq(1.1*this.radius+0.2*this.U_SCALE) ) {
+			this.c = color('rgb(0,0,255)');
+			this.strokeWeight = 12;
+			return true;
+		} else {
+			this.refreshColor(this.order_num);
+			this.strokeWeight = this.default_strokeWgt;
+			return false;
+		}
+	}
+
 	refreshColor(onum) {
 		var animate_b = 0;
 		var animate_s = 0;
+
 		if(onum==this.order_num) {
 			animate_b = 40;
 			animate_s = -30;

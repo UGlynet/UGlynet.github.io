@@ -119,22 +119,17 @@
     };
 
     // addObject(object) to add all params of the object
-    // addObject(object, param1, param2, ...) to add selected params
     this.addObject = function() {
       // get object
       object = arguments[0];
       // convert arguments object to array
       var params = [];
-      if(arguments.length > 1) {
-        params = Array.prototype.slice.call(arguments)
-        params = params.slice(1);
-      }
       // if no arguments are provided take all keys of the object
       if(params.length === 0) {
         // won't work in Internet Explorer < 9 (use a polyfill)
         params = Object.keys(object);
       }
-      qs.bindParams(object, params);
+      qs.bindParams(object, params, arguments[1]);
     };
 
     // noLoop() to call draw every time the gui changes when we are not looping
@@ -144,6 +139,10 @@
 
     this.loop = function() {
       qs.setGlobalChangeHandler(null);
+    };
+
+    this.setHandler = function(handler) {
+      qs.setGlobalChangeHandler(handler);
     };
 
     // pass through ...
@@ -157,7 +156,7 @@
 
     // Extend Quicksettings
     // so it can magically create a GUI for parameters passed by name
-    qs.bindParams = function(object, params) {
+    qs.bindParams = function(object, params, labeltexts) {
 
       // iterate over all the arguments
       for(var i = 0; i < params.length; i++) {
@@ -165,8 +164,7 @@
         var arg = params[i];
         var val = object[arg];
         var typ = typeof val;
-
-        //console.log(typ, arg, val);
+        var labeltext = labeltexts[i];
 
         // don't need to show the sliders for range min, max and step of a property
         var sliderConfigRegEx = /^(.*min|.*max|.*step)$/i;
@@ -187,10 +185,10 @@
               var vcolor = '#' + c2.map(function(value) {
                 return ('0' + value.toString(16)).slice(-2);
               }).join('');
-              this.bindColor(arg, vcolor, object);
+              this.bindColor(arg, vcolor, labeltext, object);
             } else {
               // multiple choice drop down list
-              this.bindDropDown(arg, val, object);
+              this.bindDropDown(arg, val, labeltext, object);
               object[arg] = val[0];
             }
             break;
@@ -207,7 +205,7 @@
             var vmax = Math.max(val, vmax);
 
             // set the range
-            this.bindRange(arg, vmin, vmax, val, vstep, object);
+            this.bindRange(arg, vmin, vmax, val, vstep, labeltext, object);
 
             break;
 
@@ -216,16 +214,16 @@
             var HEX6 = /^#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})$/i;
             if(HEX6.test(val)) {
               // HTML color value (such as #ff0000)
-              this.bindColor(arg, val, object);
+              this.bindColor(arg, val, labeltext, object);
             } else {
               // String value
-              this.bindText(arg, val, object);
+              this.bindText(arg, val, labeltext, object);
             }
             break;
 
           case 'boolean':
 
-            this.bindBoolean(arg, object[arg], object);
+            this.bindBoolean(arg, object[arg], labeltext, object);
             break;
 
         }

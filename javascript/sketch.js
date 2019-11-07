@@ -1,4 +1,4 @@
-var w = window.innerWidth*0.95, h = window.innerHeight*0.9;
+var w = window.innerWidth, h = window.innerHeight;
 var cnv;
 
 var r = 50; //(w < h)?w/3:h/3;
@@ -22,9 +22,9 @@ var MOUSE_FORCE = 5; // positive 'push', negative 'pull'
 
 // scales and constants
 let U1_OFFSET_X = w*1/3-U_SCALE*2;
-let U1_OFFSET_Y = h/2.2;
+let U1_OFFSET_Y = h*0.7; //h/2.2;
 let U2_OFFSET_X = w*2/3+U_SCALE*2;
-let U2_OFFSET_Y = h/2.2;
+let U2_OFFSET_Y = h*0.7;//h/2.2;
 
 // u-net settings
 var u1, u2;
@@ -35,14 +35,15 @@ var operations = ['preserve original', 'add', 'multiply', 'substitute (all)', 's
 var operations_skpcn = ['preserve', 'cut off', 'add', 'multiply'];
 var background_params = {
   red_channel: 100,
-  blue_channel: 100,
-  green_channel: 100
+  green_channel: 100,
+  blue_channel: 100
 };
 
 // background & controllers
 var background_color = myColor;
 var background_color_string = background_color.toString();
 var controllers = [];
+var controller_options = [];
 var tick = 0;
 var turn_num = 0;
 
@@ -61,18 +62,17 @@ function setup() {
   let main_div = document.getElementById('main_div');
   main_div.appendChild(cnv_element);
 
-
-  // background
+  // background controller
+  let controller_labeltexts = ["빨간색", "초록색", "파란색"];
   document.body.style.backgroundColor = myColor;
   sliderRange(0, 200, 1);
-  background_controller = createGui('Multipliers for RGB channels');
-  background_controller.addObject(background_params);
+  background_controller = createGui('비디오의 필터 색깔을 정해주세요');
+  background_controller.addObject(background_params, controller_labeltexts);
   background_controller.on = false;
   controllers.push(background_controller);
 
   var bgcontroller = document.getElementsByClassName('qs_main')[0];
   bgcontroller.onchange = setBackgroundColor;
-
 
   // create U-net
   sliderRange(0, 100, 1);
@@ -91,12 +91,12 @@ function draw() {
   colorMode(HSB);
   background(color(background_color_string));
 
-  if (mouseX  || mouseY) {
-    var mouseVector = createVector(mouseX/w-.5, mouseY/h-.5);
-    mouseVector.mult(MOUSE_FORCE);
-    X_SPEED = mouseVector.x;
-    Y_SPEED = mouseVector.y;
-  }
+  // if (mouseX  || mouseY) {
+  //   // var mouseVector = createVector(mouseX/w-.5, mouseY/h-.5);
+  //   // mouseVector.mult(MOUSE_FORCE);
+  //   X_SPEED = mouseVector.x;
+  //   Y_SPEED = mouseVector.y;
+  // }
 
   X_SPEED = random(-0.5, 0.5);
   Y_SPEED = random(-0.5, 0.5);
@@ -140,6 +140,9 @@ function draw() {
     color_speed *= -1;
   }
   color_x += color_speed;
+
+  // check hovered
+  unetHovered();
 }
 
 function canvasClicked() {
@@ -147,20 +150,25 @@ function canvasClicked() {
     controllers[i].hide();
   }
 
+  // 'make video' button
   if (button_x_left_end <= mouseX && mouseX <= button_x_left_end+button_w
     && button_y_upper_end <= mouseY && mouseY <= button_y_upper_end+button_h) {
-    save(cnv, 'unet.png');
+    document.videoform.submit();
+    document.getElementById('main_div').hide();
     return;
   }
 
+  // Check clicked
+  console.log("yes!");
   if (u1.clicked(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y)
     || u2.clicked(mouseX-U2_OFFSET_X, mouseY-U2_OFFSET_Y)) {
     return;
   } else {
-    if(background_controller.on==false) {
+    // Change background color by background controller
+    if(background_controller.on===false) {
       // TODO: adjust controller positions
       // Just hard coded the positions for the sake of time.
-      background_controller.setPosition(mouseX+U_SCALE, mouseY+U1_OFFSET_Y-U_SCALE*2);
+      background_controller.setPosition(mouseX+0.2*U_SCALE, mouseY-U_SCALE*4.3);
       background_controller.show();
       background_controller.on = true;
     } else {
@@ -169,9 +177,20 @@ function canvasClicked() {
   }
 }
 
-function checkHover() {
-  u1.hover(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y);
-  u2.hover(mouseX-U2_OFFSET_X, mouseY-U2_OFFSET_Y);  
+// document.getElementsByTagName("BODY")[0].onclick = function() {
+//   if(background_controller.on===false) {
+//     background_controller.setPosition(mouseX+U_SCALE, mouseY+U1_OFFSET_Y-U_SCALE*3);
+//     background_controller.show();
+//     background_controller.on = true;
+//   } else {
+//     background_controller.hide();
+//     background_controller.on = false;
+//   }
+// };
+
+function unetHovered() {
+  u1.hovered(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y);
+  u2.hovered(mouseX-U2_OFFSET_X, mouseY-U2_OFFSET_Y);  
 }
 
 function toHsbString(h, s, b) {

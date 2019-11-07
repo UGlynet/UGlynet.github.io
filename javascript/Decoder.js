@@ -16,14 +16,14 @@ class Decoder {
 		this.strokeWeight = default_strokeWgt;
 
 		// controller
-		this.controller_options = {
-			options: operations,
-			val: 50
-		}
-		this.controller = createGui(window, "decoder", "QuickSettings");
-		this.controller.addObject(this.controller_options);
-		this.controller_options.options = random(operations);
-		controllers.push(this.controller);
+		// this.controller_options = {
+		// 	options: operations,
+		// 	val: 50
+		// }
+		// this.controller = createGui(window, "decoder", "QuickSettings");
+		// this.controller.addObject(this.controller_options);
+		// this.controller_options.options = random(operations);
+		// controllers.push(this.controller);
 	}
 
 	display() {
