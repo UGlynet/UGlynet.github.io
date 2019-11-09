@@ -84,12 +84,20 @@ p {
   color: blue;
 }
 
-#next-btn {
+.next-btn-off {
   display: none;
 }
 
-#video-btn {
+.next-btn-on {
+  display: block;
+}
+
+.video-btn {
   font-size: 20px;
+}
+
+.ugly-val {
+  display: none;
 }
 
 /* Gallery */

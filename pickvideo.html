@@ -83,25 +83,25 @@
 
   </div>
 
-  <button id="next-btn" onclick="buttonOnClick()" class="custom-button"><i>Next<i></button>
-</body>
+  <button id="next-btn" onclick="buttonOnClick()" class="custom-button next-btn-off"><i>Next<i></button>
 
-<script>
-jQuery( document ).ready(function($) {
-  $('.vid-pane').click(function() {
-    this.previousSibling.previousSibling.paused ? this.previousSibling.previousSibling.play() : this.previousSibling.previousSibling.pause();
-    $('video').not($(this.previousSibling.previousSibling)).each(function() {
-      this.pause();
+  <script>
+  jQuery( document ).ready(function($) {
+    $('.vid-pane').click(function() {
+      this.previousSibling.previousSibling.paused ? this.previousSibling.previousSibling.play() : this.previousSibling.previousSibling.pause();
+      $('video').not($(this.previousSibling.previousSibling)).each(function() {
+        this.pause();
+      });
+      document.getElementById('next-btn').style.display = 'block';
     });
-    document.getElementById('next-btn').style.display = 'block';
   });
-});
 
-function buttonOnClick() {
-  sessionStorage.originalNo = $('input[name=original]:checked').val();
-  location.href='unet.html';
-}
+  function buttonOnClick() {
+    sessionStorage.originalNo = $('input[name=original]:checked').val();
+    location.href='unet.html';
+  }
+  </script>
 
-</script>
+</body>
 
 </html>

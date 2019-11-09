@@ -42,8 +42,9 @@ var background_params = {
 // background & controllers
 var background_color = myColor;
 var background_color_string = background_color.toString();
-var controllers = [];
+var controllers= [];
 var controller_options = [];
+var controller_panes;
 var tick = 0;
 var turn_num = 0;
 
@@ -54,6 +55,8 @@ let button_x_left_end = w/2 - button_w/2;
 let button_y_upper_end = h-button_h-U_SCALE;
 
 function setup() {
+  frameRate(40);
+
   cnv = createCanvas(w, h);
   cnv.mouseClicked(canvasClicked);
 
@@ -61,6 +64,13 @@ function setup() {
   let cnv_element = document.getElementsByTagName('canvas')[0];
   let main_div = document.getElementById('main_div');
   main_div.appendChild(cnv_element);
+
+  // create U-net
+  sliderRange(0, 100, 1);
+  u1 = new Unet(U_SCALE, 20, px_offset, 0);
+  u2 = new Unet(U_SCALE, 20, px_offset, 1);
+
+  strokeJoin(ROUND);
 
   // background controller
   let controller_labeltexts = ["빨간색", "초록색", "파란색"];
@@ -71,20 +81,20 @@ function setup() {
   background_controller.on = false;
   controllers.push(background_controller);
 
-  var bgcontroller = document.getElementsByClassName('qs_main')[0];
-  bgcontroller.onchange = setBackgroundColor;
-
-  // create U-net
-  sliderRange(0, 100, 1);
-  u1 = new Unet(U_SCALE, 20, px_offset, 0);
-  u2 = new Unet(U_SCALE, 20, px_offset, 1);
+  // bind onclick events
+  controller_panes = Array.from(document.getElementsByClassName('qs_main'));
+  controller_panes[8].onchange = setBackgroundValue; // background controller
+  for (let i = 0; i < controller_panes.length-1; i++) {
+    // controller_panes[i].onchange = "setChangeValue("+i+")";
+    controller_panes[i].addEventListener('change', function(){
+      setChangeValue(this);
+    });
+  }
 
   // hide all controllers
   for (let i=0; i<controllers.length; i++) {
     controllers[i].hide();
   }
-
-  strokeJoin(ROUND);
 }
 
 function draw() {
@@ -129,8 +139,8 @@ function draw() {
   u2.display();
   pop();
 
-  // button
-  buttonDisplay();
+  // // button
+  // buttonDisplay();
   
   // update NOISE offsets
   z_off += Z_SPEED;
@@ -150,16 +160,7 @@ function canvasClicked() {
     controllers[i].hide();
   }
 
-  // 'make video' button
-  if (button_x_left_end <= mouseX && mouseX <= button_x_left_end+button_w
-    && button_y_upper_end <= mouseY && mouseY <= button_y_upper_end+button_h) {
-    document.videoform.submit();
-    document.getElementById('main_div').hide();
-    return;
-  }
-
   // Check clicked
-  console.log("yes!");
   if (u1.clicked(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y)
     || u2.clicked(mouseX-U2_OFFSET_X, mouseY-U2_OFFSET_Y)) {
     return;
@@ -177,17 +178,6 @@ function canvasClicked() {
   }
 }
 
-// document.getElementsByTagName("BODY")[0].onclick = function() {
-//   if(background_controller.on===false) {
-//     background_controller.setPosition(mouseX+U_SCALE, mouseY+U1_OFFSET_Y-U_SCALE*3);
-//     background_controller.show();
-//     background_controller.on = true;
-//   } else {
-//     background_controller.hide();
-//     background_controller.on = false;
-//   }
-// };
-
 function unetHovered() {
   u1.hovered(mouseX-U1_OFFSET_X, mouseY-U1_OFFSET_Y);
   u2.hovered(mouseX-U2_OFFSET_X, mouseY-U2_OFFSET_Y);  
@@ -203,28 +193,4 @@ function toRgbString(r, g, b) {
 
 function multiplierToRgb(multiplier) {
   return Math.floor(multiplier / 200 * 255);
-}
-
-function setBackgroundColor() {
-  var params = [background_params.red_channel,
-                background_params.green_channel,
-                background_params.blue_channel];
-  var rgbs = params.map(multiplierToRgb);
-
-  background_color_string = toRgbString(rgbs[0], rgbs[1], rgbs[2]);
-  document.body.style.backgroundColor = background_color_string;
-};
-
-// button helpers
-function buttonDisplay() {
-  strokeWeight(6);
-  fill('blue');
-  rect(button_x_left_end, button_y_upper_end, button_w, button_h);
-
-  noStroke();
-  textAlign(CENTER);
-  textStyle(ITALIC);
-  fill('white');
-  textSize(24);
-  text("make video", w/2, button_y_upper_end+button_h/2+9);
 }

@@ -78,25 +78,26 @@
     <video id="modal-vid" class="w3-modal-content" autoplay="autoplay"><source id="modal-vid-src" src="video/sample.mp4" type="video/mp4"></video>
   </div>
 
-  <button id="start-btn" onclick="buttonOnClick()" class="custom-button"><i>Restart<i></button>
+  <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Restart<i></button>
+
+  <script>
+  function onClick(element) {
+    document.getElementById("modal-vid-src").src = element.src;
+    document.getElementById("modal-div").style.display = "block";
+    document.getElementById("modal-vid").play();
+  }
+
+  function modalOnClick(element) {
+    element.style.display='none';
+    document.getElementById("modal-vid").pause();
+  }
+
+  function buttonOnClick(element) {
+    sessionStorage.clear();
+    location.href='help.html';
+  }
+  </script>
+
 </body>
-
-<script>
-function onClick(element) {
-  document.getElementById("modal-vid-src").src = element.src;
-  document.getElementById("modal-div").style.display = "block";
-  document.getElementById("modal-vid").play();
-}
-
-function modalOnClick(element) {
-  element.style.display='none';
-  document.getElementById("modal-vid").pause();
-}
-
-function buttonOnClick(element) {
-  sessionStorage.clear();
-  location.href='help.html';
-}
-</script>
 
 </html>
