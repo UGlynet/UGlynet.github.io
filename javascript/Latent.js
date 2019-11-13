@@ -76,7 +76,7 @@ class Latent {
 	}
 
 	refreshColor() {
-		this.c = color(toHsbString(hue_palette[ operations.indexOf(this.controller_options.options) ],
+		this.c = color(toHsbString(hue_palette[this.controller.getValue('options').index],
 									100,
 									this.controller_options.val*0.5+50));
 	}

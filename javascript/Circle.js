@@ -29,6 +29,7 @@ class Circle {
 			this.controller = createGui(window, name, "QuickSettings");
 			this.controller.addObject(this.controller_options, controller_labeltexts);
 			controller_options.push(this.controller_options);
+			this.controller.setValue('options', Math.floor(Math.random()*operations.length));
 			controllers.push(this.controller);
 			this.controller.on = false;
 		}
@@ -101,12 +102,12 @@ class Circle {
 		}
 
 		if(this.activated) {
-			this.c = color(toHsbString(hue_palette[ operations.indexOf(this.controller_options.options) ],
+			this.c = color(toHsbString(hue_palette[this.controller.getValue('options').index],
 										100 + animate_s,
 										this.controller_options.val*0.5+50 + animate_b));
 		} else {
 			this.c = color(toHsbString(max(hue(this.base_color)+floor(this.random_h), 10),
-										40 + this.random_s + animate_s,
+										15 + animate_s,
 										60 + this.random_b + animate_b));
 		}
 	}

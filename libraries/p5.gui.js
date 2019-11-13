@@ -153,6 +153,12 @@
       qs.setPosition(x, y);
       return this;
     };
+    this.setValue = function(title, value) {
+      qs._controls[title].setValue(value);
+    };
+    this.getValue = function(title) {
+      return qs._controls[title].getValue();
+    }
 
     // Extend Quicksettings
     // so it can magically create a GUI for parameters passed by name

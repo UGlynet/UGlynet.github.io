@@ -3,11 +3,12 @@ class SkpCon {
 		this.U_SCALE = U_SCALE;
 		this.vertices_gap = vertices_gap;
 
-		this.x_left_end = x;
-		this.y_upper_end = y;
-		this.x_right_end = x + 5.2*U_SCALE;
+		// this.x_left_end = x;
+		// this.y_upper_end = y;
+		// this.x_right_end = x + 5.2*U_SCALE;
 		this.x_speed = 0.05 * U_SCALE;
-		this.encoder_traits = encoder_traits;
+		this.left_ends = encoder_traits;
+		this.right_ends = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 		this.decoder_traits = decoder_traits;
 
 		this.click_dist = 0.6*U_SCALE;
@@ -26,21 +27,14 @@ class SkpCon {
 		let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
 		this.controller = createGui(window, "원본 프레임의 모습을 그대로 전달하는 Skip Connection", "QuickSettings");
 		this.controller.addObject(this.controller_options, controller_labeltexts);
-		this.controller_options.options = random(operations_skpcn);
+		this.controller.setValue('options', Math.floor(Math.random()*operations_skpcn.length));
 		controllers.push(this.controller);
 		this.controller.on = false;
 
-		this.refreshColor();
+		this.refreshColorEdge();
 	}
 
 	display() {
-		// animation & cut off
-		if(this.controller_options.options==="cut off") this.x_right_end = this.x_left_end + 2.6*this.U_SCALE;
-		else {
-			this.x_right_end += this.x_speed;
-			if(this.x_right_end > this.x_left_end+5.2*U_SCALE) this.x_right_end = this.x_left_end;
-		}
-
 		// color
 		noFill();
 
@@ -51,9 +45,9 @@ class SkpCon {
 	    	strokeCap(SQUARE);
 	    	strokeWeight(this.strokeWgt_outer);
 			beginShape(LINES);
-			for (let step=0; step <= this.decoder_traits[i][0]-this.encoder_traits[i][0]; step += this.vertices_gap) {
-				let x = this.encoder_traits[i][0] + step;
-				let y = this.encoder_traits[i][1] - 0.4*U_SCALE;
+			for (let step=0; step <= this.right_ends[i][0]-this.left_ends[i][0]; step += this.vertices_gap) {
+				let x = this.left_ends[i][0] + step;
+				let y = this.left_ends[i][1] - 0.4*U_SCALE;
 
 				let new_x = x + ( noise(((x_off+x)/NOISE_SCALE), ((y_off+y)/NOISE_SCALE), z_off)
 				                  * px_offset );
@@ -69,9 +63,9 @@ class SkpCon {
 			stroke(0);
 			strokeWeight(this.strokeWgt);
 			beginShape(LINES);
-			for (let step=0; step <= this.decoder_traits[i][0]-this.encoder_traits[i][0]; step += this.vertices_gap) {
-				let x = this.encoder_traits[i][0] + step;
-				let y = this.encoder_traits[i][1] - 0.4*U_SCALE;
+			for (let step=0; step <= this.right_ends[i][0]-this.left_ends[i][0]; step += this.vertices_gap) {
+				let x = this.left_ends[i][0] + step;
+				let y = this.left_ends[i][1] - 0.4*U_SCALE;
 
 				let new_x = x + ( noise(((x_off+x)/NOISE_SCALE), ((y_off+y)/NOISE_SCALE), z_off)
 				                  * px_offset );
@@ -87,8 +81,8 @@ class SkpCon {
 
 	clicked(mX, mY) {
 		for (var i=0; i<5; i++) {
-			var y = this.encoder_traits[i][1] - 0.4*U_SCALE;
-			if(this.encoder_traits[i][0] <= mX && mX <= this.decoder_traits[i][0]
+			var y = this.left_ends[i][1];
+			if(this.left_ends[i][0] <= mX && mX <= this.right_ends[i][0]
 				&& y-this.click_dist <= mY && mY <= y+this.click_dist) {
 				if(this.controller.on==false) {
 					this.controller.setPosition(mouseX, mouseY);
@@ -104,15 +98,15 @@ class SkpCon {
 
 	hovered(mX, mY) {
 		for (var i=0; i<5; i++) {
-			var y = this.encoder_traits[i][1] - 0.4*U_SCALE;
-			if(this.encoder_traits[i][0] <= mX && mX <= this.decoder_traits[i][0]
+			var y = this.left_ends[i][1];
+			if(this.left_ends[i][0] <= mX && mX <= this.right_ends[i][0]
 				&& y-this.click_dist <= mY && mY <= y+this.click_dist) {
 				this.c = color('rgb(0,0,255)');
 				this.strokeWgt = 3;
 				this.strokeWgt_outer = 8;
 				return true;
 			} else {
-				this.refreshColor();
+				this.refreshColorEdge();
 				this.strokeWgt = this.default_strokeWgt;
 				this.strokeWgt_outer = this.default_strokeWgt_outer;
 			}
@@ -120,9 +114,20 @@ class SkpCon {
 		return false;
 	}
 
-	refreshColor() {
-		this.c = color(toHsbString( operations_skpcn.indexOf(this.controller_options.options) * 150,
+	refreshColorEdge() {
+		this.c = color(toHsbString( this.controller.getValue('options').index * 150,
 									100,
-									this.controller_options.val*0.5+50));
+									this.controller.getValue('val')+50));
+
+		// animation & cut off
+		if(this.controller.getValue('options').index===1) {
+			for (let i=0; i<this.left_ends.length; i++) {
+				this.right_ends[i][0] = this.left_ends[i][0] + (this.decoder_traits[i][0]-this.left_ends[i][0])/2;
+			}
+		} else {
+			for (let i=0; i<this.left_ends.length; i++) {
+				this.right_ends[i][0] = this.decoder_traits[i][0];
+			}			
+		}
 	}
 }

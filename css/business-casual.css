@@ -100,6 +100,71 @@ p {
   display: none;
 }
 
+.qs_main {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Info */
+.info-div {
+  position: relative;
+  height: 400px;
+  width: 80%;
+  margin: 0 auto;
+  /*padding: 20px;*/
+  color: black;
+}
+
+.info-text {
+  width: 100%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  padding-top: 30px;
+
+  font-size: 40px;
+  text-align: center;
+
+  border: 0.2em solid #000; 
+  border-radius: 0.5rem;  
+}
+
+.info-text span {
+  color: blue;
+  font-weight: bolder;  
+  font-style: italic;
+  font-size: 60px;
+}
+
+.picture-div {
+  position: relative;
+  height: 100px;
+  width: 80%;
+  margin: 0 auto;
+  color: black;
+}
+
+.picture-text {
+  width: 100%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  padding-top: 30px;
+  color: blue;
+
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-style: italic; 
+}
+
+/*#code {
+  font-weight: bolder;
+  font-size: 80px;
+  font-style: italic;
+}*/
+
 /* Gallery */
 .thumbnails {
   margin-top: 2em;

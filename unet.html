@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link href="css/business-casual.css" rel="stylesheet">  
 
@@ -105,7 +106,7 @@
 
       function setChangeValue(element) {
         var controller_idx = controller_panes.indexOf(element);
-        var select_val = $('.qs_select')[controller_idx].value;
+        var select_val = $('.qs_select')[controller_idx].selectedIndex;
         var range_val = $('.qs_range')[controller_idx].value; 
         var inputs = $('.f-map');
         inputs[controller_idx*2].value = select_val;

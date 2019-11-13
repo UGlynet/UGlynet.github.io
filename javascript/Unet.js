@@ -113,7 +113,7 @@ class Unet {
 	}
 
 	setCircleColor(circles) {
-		// circles[0].refreshColor(turn_num);
+		circles[0].refreshColor(turn_num);
 		var base_color = circles[0].c;
 
 		for (let i=1; i<5; i++) {
