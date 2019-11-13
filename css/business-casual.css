@@ -110,7 +110,6 @@ p {
   height: 400px;
   width: 80%;
   margin: 0 auto;
-  /*padding: 20px;*/
   color: black;
 }
 
@@ -159,12 +158,6 @@ p {
   font-style: italic; 
 }
 
-/*#code {
-  font-weight: bolder;
-  font-size: 80px;
-  font-style: italic;
-}*/
-
 /* Gallery */
 .thumbnails {
   margin-top: 2em;
@@ -178,7 +171,7 @@ p {
   top: 0;
   left: 0;
   object-fit: cover;
-  border: 0.2em solid #000;
+  /*border: 0.2em solid #000;*/
 }
 
 .unet
@@ -222,11 +215,6 @@ label {
   background-color: #000;
   border: 0.2em solid #000;
 }
-/*
-.vid-thumbnail {
-  position: absolute;
-}
-*/
 
 /* modal */
 .gallery-modal {
@@ -237,6 +225,60 @@ label {
   border: 1em solid #000;
   width: 90%;
 }
+
+/* Help.html */
+.help-div {
+}
+
+.help-video {
+  width: 90%;
+  border-radius: 0.2em;
+  border: 0.4em solid #000;
+}
+
+/* Collect.html */
+.collect-body {
+  background-color: blue;
+}
+
+.collect-body h1 {
+  color: white;
+}
+
+.collect-body button {
+  color: white;
+}
+
+.collect-div {
+  width: 100%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding-top: 50px;
+  color: blue;
+}
+
+.collect-no {
+  background-color: white;
+  height: 160px;
+  font-size: 60px;
+  border-radius: 0.2em;
+  border: 0.2em solid #000;
+  color: blue;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.collect-no-short {
+  width: 160px;
+}
+
+.collect-no-long {
+  width: 320px;
+}
+
+
 
 /* Portfolio */
 .balloon {

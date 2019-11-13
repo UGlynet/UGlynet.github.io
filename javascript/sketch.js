@@ -1,4 +1,4 @@
-var w = window.innerWidth, h = window.innerHeight;
+var w = window.innerWidth, h = window.innerHeight*1.1;
 var cnv;
 
 var r = 50; //(w < h)?w/3:h/3;
