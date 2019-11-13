@@ -51,10 +51,10 @@ class Unet {
 
 	display() {
 		this.skpCn.display();
-
 		this.hovered();
 		this.setCircleColor(this.encoder_circles);
 		this.setCircleColor(this.decoder_circles);
+		this.latent.refreshColor();
 
 		strokeWeight(this.default_strokeWgt); // 4 or 24
 		stroke(0);
