@@ -40,7 +40,7 @@ $VideoArr = array_reverse(glob("Sample/*"));
           echo '<div class="work col-lg-4 col-md-6 col-12">
             <input type="radio" name="original" class="vid-radio" id="sample'.$i.'" value="1"/>
             <div class="d-block mb-4 h-100">
-              <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="Sample/sample'.$i.'.mp4" type="video/mp4"></video>
+              <video class="thumbnail img-fluid img-thumbnail" preload="metadata"><source src="Sample/sample'.$i.'.mp4" type="video/mp4"></video>
               <label for="sample'.$i.'" class="vid-pane img-fluid" alt=""></label>
             </div>
           </div>';
