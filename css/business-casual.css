@@ -84,6 +84,40 @@ p {
   color: blue;
 }
 
+.button-div {
+  position:fixed;
+  width: 100%;
+  bottom: 5%;
+}
+
+.centered-button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  
+  margin: auto;
+  bottom: 5%;
+
+  text-align: center;
+  text-decoration: none;
+  font-size: 30px;
+  color: white;
+
+  width: 180px;
+  height: 100px;
+  line-height: 88px;
+
+  border: 0.2em solid #000;
+  background-color: blue;  
+  border-radius: 0.2em;
+}
+
+.centered-button:hover {
+  text-decoration: none;
+  background-color: yellow;
+  color: blue;
+}
+
 .next-btn-off {
   display: none;
 }

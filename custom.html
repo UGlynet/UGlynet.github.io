@@ -21,23 +21,24 @@
   <link href="css/business-casual.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="collect-body">
   <!-- Page Content -->
   <div class="container title_div">
-    <h1 class="title text-center mt-4 mb-0">Welcome</h1>
-    <div class="thumbnails row text-center text-lg-left"></div>
-    <div class="thumbnail help-div">
-      <video class="help-video" autoplay="autoplay" muted loop><source src="video/help_video_dark_3.mp4" type="video/mp4"></video>
+    <h1 class="title text-center mt-4 mb-0">Your UGly-Net Video:</h1>
+    <!-- TODO: Set href to the video's url -->
+    <div class="collect-div">
+      <video class="help-video" autoplay="autoplay" loop muted><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
     </div>
   </div>
 
-  <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Start<i></button>
+  <div class="container title_div">
 
-  <script>
-    function buttonOnClick() {
-      location.href="pickvideo.php"
-    }
-  </script>
+  </div>
+
+  <!-- TODO: Set href to the video's url -->
+  <form method="get" action="video/b.mp4" class="button-div">
+    <button type="submit" class="centered-button next-btn-on"><i>Download</i></button>
+  </form>
 
 </body>
 </html>
