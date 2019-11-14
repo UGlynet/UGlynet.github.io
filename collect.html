@@ -31,16 +31,25 @@
   </div>
 
   <div class="container title_div">
-    <form method="post" id="code-form">
       <div class="collect-div">
-        <input type="number" class="collect-no collect-no-short" alt="" placeholder="##" name="code0" min="15" max="31">
-        <input type="number" class="collect-no collect-no-long" alt="" placeholder="####" name="code1" min="0" max="9999">   
-        <input type="number" class="collect-no collect-no-short" alt="" placeholder="##" name="code2" min="0" max="99"> 
-      </div>       
-    </form>
+        <input type="number" id='v1' class="collect-no collect-no-short" alt="" placeholder="##" name="code0" min="15" max="31">
+        <input type="number" id='v2' class="collect-no collect-no-long" alt="" placeholder="####" name="code1" min="0" max="9999">   
+        <input type="number" id='v3' class="collect-no collect-no-short" alt="" placeholder="##" name="code2" min="0" max="99"> 
+      </div>
   </div>
 
-  <button type="submit" class="custom-button next-btn-on" form="code-form" value="Submit"><i>Submit<i></button>
+  <button type="button" class="custom-button next-btn-on" onclick="buttonOnClick()" ><i>Submit<i></button>
+
+    <script src="./libraries/jquery-3.4.1.slim.min.js"></script>
+<script>
+  function buttonOnClick(){
+    var value1 = $('#v1').val();
+    var value2 = $('#v2').val();
+    var value3 = $('#v3').val();
+    location.href="custom.php?id="+value1+'-'+value2+'-'+value3;
+  }
+</script>
+
 
 </body>
 
