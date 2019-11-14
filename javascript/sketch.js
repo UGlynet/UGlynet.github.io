@@ -7,7 +7,7 @@ var vertices_amount = 120;
 
 var px_offset = 20;    // amplitude, 50
 var NOISE_SCALE = 120;  // the higher the softer, originally 80
-var U_SCALE = w/35; //h/15;
+var U_SCALE = h/30; //w/40; //h/15;
 
 var Z_SPEED = .01; // noise change per frame
 
@@ -22,9 +22,9 @@ var MOUSE_FORCE = 5; // positive 'push', negative 'pull'
 
 // scales and constants
 let U1_OFFSET_X = w*1/3-U_SCALE*2;
-let U1_OFFSET_Y = h*0.7; //h/2.2;
+let U1_OFFSET_Y = h*0.6; //h/2.2;
 let U2_OFFSET_X = w*2/3+U_SCALE*2;
-let U2_OFFSET_Y = h*0.7;//h/2.2;
+let U2_OFFSET_Y = h*0.6;//h/2.2;
 
 // u-net settings
 var u1, u2;
