@@ -15,7 +15,7 @@ $UserID = $_GET['id'];
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>UGly-Net: Gallery</title>
+  <title>UGly-Net</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
