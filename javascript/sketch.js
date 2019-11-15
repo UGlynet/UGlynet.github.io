@@ -33,7 +33,7 @@ var myColor = '#eeee00';
 var hue_palette = [60, 0, 120, 240, 300, 360];
 // var operations = ['preserve original', 'add', 'multiply', 'substitute (all)', 'substitute (width vector)', 'substitute (height vector)'];
 // var operations_skpcn = ['preserve', 'cut off', 'add', 'multiply'];
-var operations = ['원본대로', '더하기', '곱하기', '전체화면에서 빼기', '가로방향에서 빼기', '세로방향에서 빼기'];
+var operations = ['원본대로', '더하기', '곱하기', '전체화면에서 빼기'];
 var operations_skpcn = ['원본대로', '자르기', '더하기', '곱하기'];
 var background_params = {
   red_channel: 200,
