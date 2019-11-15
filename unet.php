@@ -63,7 +63,7 @@
       </form>
     </div>
 
-    <button onclick="buttonOnClick()" class="custom-button video-btn" style="z-index:5"><i>Make Video<i></button>
+    <button onclick="buttonOnClick()" class="custom-button video-btn" style="z-index:5"><i>Make Video</i></button>
 
     <script src="./javascript/sketch.js"></script>
     <script src="./javascript/Unet.js"></script>
