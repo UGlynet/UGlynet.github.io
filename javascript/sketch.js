@@ -57,7 +57,7 @@ let button_x_left_end = w/2 - button_w/2;
 let button_y_upper_end = h-button_h-U_SCALE;
 
 function setup() {
-  frameRate(40);
+  frameRate(60);
 
   cnv = createCanvas(w, h);
   cnv.mouseClicked(canvasClicked);
