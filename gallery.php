@@ -45,7 +45,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
       echo '<div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
       <div class="d-block mb-4 h-100">
-      <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="Result/'.$NameList[1].'.mp4" type="video/mp4"></video>
+      <video class="thumbnail img-fluid img-thumbnail" preload="metadata"><source src="Result/'.$NameList[1].'.mp4" type="video/mp4"></video>
       <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
       <img class="unet img-fluid img-thumbnail" src="'.$VideoArr[$i].'" alt="">
       </div></div>';
@@ -54,9 +54,9 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 //      echo $NameList[1];
     }
     ?>
-
+    </div>
     <div id="modal-div" class="w3-modal gallery-modal" onclick="modalOnClick(this)">
-    <video id="modal-vid" class="w3-modal-content" autoplay="autoplay"><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
+    <video id="modal-vid" class="w3-modal-content" autoplay="autoplay" loop><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
     </div>
 
 
@@ -76,7 +76,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
   function buttonOnClick(element) {
     sessionStorage.clear();
-    location.href='help.html';
+    location.href='help.php';
   }
   </script>
 

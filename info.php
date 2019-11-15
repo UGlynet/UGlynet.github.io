@@ -34,7 +34,7 @@ $code = $_POST['code'];
 $videonum = $_POST['videonum'];
 //echo $code;
 $name =  $code.'_'.$videonum.'_'.$estlatentopt.'_'. $estlatentval. '_'.$estskipopt. '_'.$estskipval. '_'.$estencoderopt. '_'.$estencoderval. '_'.$estdecoderopt. '_'.$estdecoderval.'_'.$intplatentopt.'_'.$intplatentval.'_'.$intpskipopt.'_'.$intpskipval.'_'.$intpencoderopt.'_'.$intpencoderval.'_'.$intpdecoderopt.'_'.$intpdecoderval.'_'.$rval .'_'.$gval.'_'. $bval;
-file_put_contents('/var/www/html/UGLY2/Thumb/'.$name.'.png', $data);
+file_put_contents('/var/www/html/Thumb/'.$name.'.png', $data);
 
 ?>
 
@@ -65,7 +65,7 @@ file_put_contents('/var/www/html/UGLY2/Thumb/'.$name.'.png', $data);
     <div class="info-div">
       <div class="info-text">
         <p>You can find your video at: <br>
-          <span>uglynet.io/video</span>
+          <span>uglynet.io/collect.html</span>
         </p>
         <p>Code:<br>
           <span id="code">
