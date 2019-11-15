@@ -40,7 +40,7 @@ $VideoArr = array_reverse(glob("Sample/*"));
           echo '<div class="work col-lg-4 col-md-6 col-12">
             <input type="radio" name="original" class="vid-radio" id="sample'.$i.'" value="1"/>
             <div class="d-block mb-4 h-100">
-              <video class="thumbnail img-fluid img-thumbnail" preload="metadata"><source src="Sample/sample'.$i.'.mp4" type="video/mp4"></video>
+              <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Sample/sample'.$i.'.mp4" type="video/mp4"></video>
               <label for="sample'.$i.'" class="vid-pane img-fluid" alt=""></label>
             </div>
           </div>';
@@ -56,6 +56,7 @@ $VideoArr = array_reverse(glob("Sample/*"));
 
   <script>
   jQuery( document ).ready(function($) {
+    $('video').each(function(){ this.pause()} );
     $('.vid-pane').click(function() {
       this.previousSibling.previousSibling.paused ? this.previousSibling.previousSibling.play() : this.previousSibling.previousSibling.pause();
       $('video').not($(this.previousSibling.previousSibling)).each(function() {
