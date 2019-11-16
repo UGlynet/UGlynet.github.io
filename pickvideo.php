@@ -46,10 +46,13 @@ $VideoArr = array_reverse(glob("Sample/*"));
           </div>';
         }
         ?>
+
+      <div>
+        <button class="arrow-button" style="margin-right: 40px"><img class="arrow-img" src="img/left-arrow.png"></button>
+        <button class="arrow-button" style="margin-left: 40px"><img class="arrow-img" src="img/right-arrow.png"></button> 
       </div>  
-
-    </div>
-
+        
+    </div>  
   </div>
 
   <button id="next-btn" onclick="buttonOnClick()" class="custom-button next-btn-off"><i>Next<i></button>
