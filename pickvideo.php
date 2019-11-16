@@ -1,5 +1,9 @@
 <?php
 $VideoArr = array_reverse(glob("Sample/*"));
+if(!isset($_GET['id'])){
+  //echo 'ets';
+  $_GET['id'] = 1;
+}
 ?>
 
 

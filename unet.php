@@ -79,7 +79,7 @@
       function buttonOnClick() {
         // generate unique name for the result
         let d = new Date();
-        let name = "" + d.getDate() + "-" + zeroPad(d.getHours() + d.getMinutes(),4) +"-" + zeroPad(Math.floor(d.getMilliseconds()/10),3);
+        let name = "" + d.getDate() + "-" + zeroPad(d.getHours(),2) + zeroPad(d.getMinutes(),2) +"-" + zeroPad(Math.floor(d.getMilliseconds()/10),3);
         sessionStorage.name = name;
         document.getElementById('code').value = name;
 

@@ -83,7 +83,7 @@ file_put_contents('/var/www/html/Thumb/'.$name.'.png', $data);
     <script>
       document.getElementById('code').innerHTML = "" + sessionStorage.name;
       function buttonOnClick() {
-        location.href = "gallery.php";
+        location.href = "gallery.php?id=1";
       }
 
       //document.write('<img src="<?php echo $_POST['thumb'];?>"/>');

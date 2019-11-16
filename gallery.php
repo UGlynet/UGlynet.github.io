@@ -1,6 +1,12 @@
 
 <?php
-$VideoArr = array_reverse(glob("Result/*.png"));
+//$VideoArr = array_reverse(glob("Result/*.png"));
+$VideoArr = glob("Result/*.png");
+sort($VideoArr);
+#var_dump($VideoArr);
+if (!isset($_GET['id'])){
+  $_GET['id'] = 1;
+}
 //var_dump($VideoArr);
 ?>
 
@@ -81,7 +87,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
   function buttonOnClick(element) {
     sessionStorage.clear();
-    location.href='help.html';
+    location.href='help.php';
   }
   </script>
 

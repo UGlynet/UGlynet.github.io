@@ -35,7 +35,7 @@
 
   <script>
     function buttonOnClick() {
-      location.href="pickvideo.php"
+      location.href="pickvideo.php?id=1"
     }
   </script>
 

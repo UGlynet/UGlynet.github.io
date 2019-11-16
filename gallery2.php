@@ -1,6 +1,7 @@
 
 <?php
-$VideoArr = array_reverse(glob("Result/*.png"));
+$VideoArr = glob("Result/*.png");
+//$VideoArr = array_reverse(glob("Result/*.png"));
 //var_dump($VideoArr);
 ?>
 
