@@ -156,7 +156,7 @@ function draw() {
   color_x += color_speed;
 
   // check hovered
-  unetHovered();
+  // unetHovered();
 }
 
 function canvasClicked() {
@@ -173,7 +173,7 @@ function canvasClicked() {
     if(background_controller.on===false) {
       // TODO: adjust controller positions
       // Just hard coded the positions for the sake of time.
-      background_controller.setPosition(mouseX+0.2*U_SCALE, mouseY-U_SCALE*4.3);
+      background_controller.setPosition(mouseX+0.2*U_SCALE, mouseY-U_SCALE*6.8);
       background_controller.show();
       background_controller.on = true;
     } else {
