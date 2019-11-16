@@ -42,13 +42,14 @@ $UserID = $_GET['id'];
       echo '<div class="container title_div">
         <h1 class="title text-center mt-4 mb-0">Your UGly-Net Video:</h1>
         <!-- TODO: Set href to the video url -->
-        <div class="collect-div">
+        <div class="thumbnails row text-center text-lg-left"></div>
+        <div class="thumbnail help-div">
           <video class="help-video" autoplay="autoplay" loop muted><source id="modal-vid-src" src="Result/'.$UserID.'.mp4" type="video/mp4"></video>
         </div>
       </div>';
     }
     else{
-        echo "<script>alert('존재하지 않는 파일입니다.');  location.replace('collect.html');   </script>";
+        echo "<script>alert('아직 비디오를 합성하는 중입니다.');  location.replace('collect.html');   </script>";
     }
   ?>
   <div class="container title_div">
