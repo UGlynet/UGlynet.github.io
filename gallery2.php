@@ -13,7 +13,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <META HTTP-EQUIV="refresh" CONTENT="15">
+  <META HTTP-EQUIV="refresh" CONTENT="60">
   <title>UGly-Net: Gallery</title>
 
   <!-- Bootstrap core CSS -->
