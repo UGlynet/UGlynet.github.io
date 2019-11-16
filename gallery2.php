@@ -43,7 +43,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
       echo '<div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
       <div class="d-block mb-4 h-100">
-      <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Result/'.$NameList[1].'.mp4" type="video/mp4"></video>
+      <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Result/'.$NameList[1].'.mp4#t=0.01" type="video/mp4"></video>
       <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
       <img class="unet img-fluid img-thumbnail" src="'.$VideoArr[$i].'" alt="">
       </div></div>';
