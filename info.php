@@ -74,7 +74,7 @@ file_put_contents('/var/www/html/UGLY2/Thumb/'.$name.'.png', $data);
     </div>
     <div class="picture-div">
       <div class="picture-text">      
-        <p>Take a Picture!</p>
+        <p>Take a Picture!<br>It may take up to 5 mins.</p>
       </div>
     </div>
 
