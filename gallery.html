@@ -34,32 +34,60 @@ $VideoArr = array_reverse(glob("Result/*.png"));
     <h1 class="title text-center mt-4 mb-0">UGly-Net Gallery</h1>
 
     <div class="thumbnails row text-center text-lg-left">
-    
-    <?php
-    for($i = 0; $i<count($VideoArr);$i++){
-      //echo $VideoArr[$i];
-//      echo '<br>';
-      $NameList = explode('_',$VideoArr[$i]); //echo $NameList[0];      echo '<br>';
-      $NameList = explode("/",$NameList[0]);
-      //var_dump($NameList);
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      <div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+        <div class="d-block mb-4 h-100">
+          <video class="thumbnail img-fluid img-thumbnail" autoplay="autoplay" preload="metadata"><source src="video/sample.mp4" type="video/mp4"></video>
+          <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+          <img class="unet img-fluid img-thumbnail" src="img/unet1.png" alt="">
+        </div>
+      </div>
+      
+    </div>
 
-      echo '<div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
-      <div class="d-block mb-4 h-100">
-      <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Result/'.$NameList[1].'.mp4" type="video/mp4"></video>
-      <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
-      <img class="unet img-fluid img-thumbnail" src="'.$VideoArr[$i].'" alt="">
-      </div></div>';
-
-
-//      echo $NameList[1];
-    }
-    ?>
+    <div>
+      <button class="arrow-button" style="margin-right: 40px"><img class="arrow-img" src="img/left-arrow.png"></button>
+      <button class="arrow-button" style="margin-left: 40px"><img class="arrow-img" src="img/right-arrow.png"></button>  
+    </div>
 
     <div id="modal-div" class="w3-modal gallery-modal" onclick="modalOnClick(this)">
       <video id="modal-vid" class="w3-modal-content" autoplay="autoplay"><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
     </div>
-
-
+  </div>
     <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Restart</i></button>
 
   <script>
