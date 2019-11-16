@@ -54,8 +54,10 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
     <div>
       <?php
-      echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=gallery.php?id='.$_GET['id'].'" ><img class="arrow-img" src="img/left-arrow.png"></button>'; 
-      echo '<button class="arrow-button" style="margin-left: 40px" onclick="location.href=gallery.php?id='.$_GET['id'].'" ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
+      $Next = min($_GET['id'] + 1, (int)(count($VideoArr)/6));
+      $Pre = max($_GET['id'] - 1, 1);
+      echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=\'gallery.php?id='.$Pre.'\'" ><img class="arrow-img" src="img/left-arrow.png"></button>'; 
+      echo '<button class="arrow-button" style="margin-left: 40px" onclick="location.href=\'gallery.php?id='.$Next.'\'" ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
       ?>
     </div>
 
