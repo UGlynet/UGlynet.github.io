@@ -203,10 +203,11 @@ p {
   width: 100%;
   transform: translate(-50%, -50%);
   position: absolute;
-  top: 60%;
+  top: 80%;
   left: 50%;
   padding-top: 30px;
   color: blue;
+  line-height: 0.8;
 
   font-size: 30px;
   text-align: center;
