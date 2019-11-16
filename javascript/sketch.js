@@ -22,9 +22,9 @@ var MOUSE_FORCE = 5; // positive 'push', negative 'pull'
 
 // scales and constants
 let U1_OFFSET_X = w*1/3-U_SCALE*2;
-let U1_OFFSET_Y = h*0.6; //h/2.2;
+let U1_OFFSET_Y = h*0.68; //h/2.2;
 let U2_OFFSET_X = w*2/3+U_SCALE*2;
-let U2_OFFSET_Y = h*0.6;//h/2.2;
+let U2_OFFSET_Y = h*0.68;//h/2.2;
 
 // u-net settings
 var u1, u2;
@@ -120,7 +120,7 @@ function draw() {
   stroke(0);
   strokeWeight(8);
   arc((U1_OFFSET_X+U2_OFFSET_X)/2, (U1_OFFSET_Y+U2_OFFSET_Y)/2-4.4*U_SCALE,
-        6*U_SCALE, 5*U_SCALE, -PI, PI);
+        8*U_SCALE, 5*U_SCALE, -PI, PI);
 
   // brightness animation
   tick++;
