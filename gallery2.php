@@ -54,7 +54,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
 
     <div>
       <?php
-      $Next = min($_GET['id'] + 1, (int)(count($VideoArr)/12));
+      $Next = min($_GET['id'] + 1, (int)(count($VideoArr)/12) + 1);
       $Pre = max($_GET['id'] - 1, 1);
       echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=\'gallery2.php?id='.$Pre.'\'" ><img class="arrow-img" src="img/left-arrow.png"></button>'; 
       echo '<button class="arrow-button" style="margin-left: 40px" onclick="location.href=\'gallery2.php?id='.$Next.'\'" ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
@@ -65,7 +65,6 @@ $VideoArr = array_reverse(glob("Result/*.png"));
     <video id="modal-vid" class="w3-modal-content" autoplay="autoplay" loop><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
     </div>
   </div>
-    <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Restart</i></button>
 
   <script>
   function onClick(element) {
@@ -79,10 +78,6 @@ $VideoArr = array_reverse(glob("Result/*.png"));
     document.getElementById("modal-vid").pause();
   }
 
-  function buttonOnClick(element) {
-    sessionStorage.clear();
-    location.href='help.php';
-  }
   </script>
 
 </body>

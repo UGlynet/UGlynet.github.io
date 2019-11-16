@@ -36,7 +36,8 @@ $VideoArr = array_reverse(glob("Sample/*"));
     <div class="thumbnails row text-center text-lg-left">
 
         <?php
-        for($i = 1; $i<=count($VideoArr); $i++){
+        for($i=($_GET['id']-1)*6+1; $i<($_GET['id']-1)*6+6+1 && $i<count($VideoArr);$i++) {
+        //for($i = 1; $i<=count($VideoArr); $i++){
           echo '<div class="work col-lg-4 col-md-6 col-12">
             <input type="radio" name="original" class="vid-radio" id="sample'.$i.'" value="1"/>
             <div class="d-block mb-4 h-100">
@@ -49,8 +50,13 @@ $VideoArr = array_reverse(glob("Sample/*"));
     </div> 
 
     <div>
-      <button class="arrow-button" style="margin-right: 40px"><img class="arrow-img" src="img/left-arrow.png"></button>
-      <button class="arrow-button" style="margin-left: 40px"><img class="arrow-img" src="img/right-arrow.png"></button> 
+      <?php
+
+      $Next = min($_GET['id'] + 1, (int)(count($VideoArr)/6) + 1);
+      $Pre = max($_GET['id'] - 1, 1);
+      echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=\'pickvideo.php?id='.$Pre.'\'"  ><img class="arrow-img" src="img/left-arrow.png"></button>
+      <button class="arrow-button" style="margin-left: 40px" onclick="location.href=\'pickvideo.php?id='.$Next.'\'"  ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
+      ?>
     </div>  
         
   </div>
