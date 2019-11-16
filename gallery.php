@@ -36,7 +36,8 @@ $VideoArr = array_reverse(glob("Result/*.png"));
     <div class="thumbnails row text-center text-lg-left">
     
     <?php
-    for($i = 0; $i<count($VideoArr);$i++){
+    for($i=($_GET['id']-1)*6; $i<($_GET['id']-1)*6+6 && $i<count($VideoArr);$i++) {
+      #for($i = 0; $i<count($VideoArr);$i++){
       $NameList = explode('_',$VideoArr[$i]); //echo $NameList[0];      echo '<br>';
       $NameList = explode("/",$NameList[0]);
 
@@ -48,13 +49,14 @@ $VideoArr = array_reverse(glob("Result/*.png"));
       </div></div>';
     }
     ?>
-    </div>
             
     </div>
 
     <div>
-      <button class="arrow-button" style="margin-right: 40px"><img class="arrow-img" src="img/left-arrow.png"></button>
-      <button class="arrow-button" style="margin-left: 40px"><img class="arrow-img" src="img/right-arrow.png"></button>  
+      <?php
+      echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=gallery.php?id='.$_GET['id'].'" ><img class="arrow-img" src="img/left-arrow.png"></button>'; 
+      echo '<button class="arrow-button" style="margin-left: 40px" onclick="location.href=gallery.php?id='.$_GET['id'].'" ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
+      ?>
     </div>
 
     <div id="modal-div" class="w3-modal gallery-modal" onclick="modalOnClick(this)">
