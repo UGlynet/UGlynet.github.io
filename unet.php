@@ -106,16 +106,16 @@
         // );
 
         // (2) Trial
-        hidden_canv.width = w;
-        hidden_canv.height = h;
+        hidden_canv.width = window.innerWidth;
+        hidden_canv.height = window.innerHeight*1.1;
         var hidden_ctx = hidden_canv.getContext('2d');
 
         hidden_ctx.drawImage(
             cnv.canvas,   
             0, // startClippingX,
-            0, // startClippingY,
-            hidden_canv.width, //clippingWidth
-            hidden_canv.height, //clippingHeight
+            U1_OFFSET_Y*0.8, // startClippingY,
+            cnv.canvas.width, //clippingWidth
+            cnv.canvas.height, //clippingHeight
             0,
             0,
             hidden_canv.width,
