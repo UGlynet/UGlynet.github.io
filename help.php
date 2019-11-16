@@ -26,7 +26,7 @@
   <div class="container title_div">
     <h1 class="title text-center mt-4 mb-0">Welcome</h1>
     <div class="thumbnails row text-center text-lg-left"></div>
-    <div class="thumbnail help-div">
+    <div class="thumbnail">
       <video class="help-video" autoplay="autoplay" muted loop><source src="video/help_video_dark_3.mp4" type="video/mp4"></video>
     </div>
   </div>
