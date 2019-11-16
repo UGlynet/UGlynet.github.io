@@ -65,7 +65,7 @@ $VideoArr = array_reverse(glob("Result/*.png"));
     <video id="modal-vid" class="w3-modal-content" autoplay="autoplay" loop><source id="modal-vid-src" src="video/b.mp4" type="video/mp4"></video>
     </div>
   </div>
-    <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Restart</i></button>
+    <button onclick="buttonOnClick()" class="custom-button next-btn-on video-btn"><i>Restart</i></button>
 
   <script>
   function onClick(element) {
