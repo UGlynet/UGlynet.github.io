@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>UGly-Net: Gallery</title>
+  <title>UGly-Net</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Start<i></button>
+  <button onclick="buttonOnClick()" class="custom-button next-btn-on"><i>Start</i></button>
 
   <script>
     function buttonOnClick() {

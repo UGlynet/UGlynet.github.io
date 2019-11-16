@@ -27,8 +27,8 @@
   <body>
     <div id="title_div">
       <h1 id="title" align="center">UGly-Net</h1>
-      <div id="subtitle">
-      </div>
+      <!-- <a href="" id="temp" download>Download</a> -->
+      <div id="subtitle"></div>
     </div>
 
     <div id='main_div' align="center"> 
@@ -63,8 +63,8 @@
       </form>
     </div>
 
-    <button onclick="buttonOnClick()" class="custom-button video-btn" style="z-index:5"><i>Make Video<i></button>
-  
+    <button onclick="buttonOnClick()" class="custom-button video-btn" style="z-index:5"><i>Make Video</i></button>
+
     <script src="./javascript/sketch.js"></script>
     <script src="./javascript/Unet.js"></script>
     <script src="./javascript/Encoder.js"></script>
@@ -84,26 +84,46 @@
         var hidden_canv = document.createElement('canvas');
         hidden_canv.style.display = 'none';
         document.body.appendChild(hidden_canv);
-        hidden_canv.width = w*2-U1_OFFSET_X;
-        hidden_canv.height = h+60;
+
+        // (1) Original
+        // hidden_canv.width = w*2-U1_OFFSET_X;
+        // hidden_canv.height = h+60;
+        // var hidden_ctx = hidden_canv.getContext('2d');
+
+        // hidden_ctx.drawImage(
+        //     cnv.canvas,   
+        //     U1_OFFSET_X/2, // startClippingX,
+        //     U1_OFFSET_Y+100, // startClippingY,
+        //     hidden_canv.width, //clippingWidth
+        //     hidden_canv.height, //clippingHeight
+        //     0,
+        //     0,
+        //     hidden_canv.width,
+        //     hidden_canv.height
+        // );
+
+        // (2) Trial
+        hidden_canv.width = w;
+        hidden_canv.height = h;
         var hidden_ctx = hidden_canv.getContext('2d');
 
         hidden_ctx.drawImage(
             cnv.canvas,   
-            U1_OFFSET_X/2, // startClippingX,
-            U1_OFFSET_Y+100, // startClippingY,
+            0, // startClippingX,
+            0, // startClippingY,
             hidden_canv.width, //clippingWidth
             hidden_canv.height, //clippingHeight
             0,
             0,
             hidden_canv.width,
-            hidden_canv.height
+            hidden_canv.height   
         );
 
         var data_url = hidden_canv.toDataURL("image/png");
         var img_input = document.getElementById("canvas-image").src = data_url;
         img_input.name = name;
         sessionStorage.data_url = data_url;
+        document.getElementById("temp").href=data_url;
         document.getElementById('thumb').value = data_url;
         //document.getElementById('videonum').value = <?php echo $_GET['id'];?>;
         document.getElementById("ugly-values").submit();
