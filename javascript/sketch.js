@@ -117,11 +117,10 @@ function draw() {
 
   // the line between 2 u-nets
   noFill();
-
   stroke(0);
   strokeWeight(8);
   arc((U1_OFFSET_X+U2_OFFSET_X)/2, (U1_OFFSET_Y+U2_OFFSET_Y)/2-4.4*U_SCALE,
-        5*U_SCALE, 5*U_SCALE, -PI, PI);
+        6*U_SCALE, 5*U_SCALE, -PI, PI);
 
   // brightness animation
   tick++;
