@@ -65,7 +65,7 @@ file_put_contents('/var/www/html/Thumb/'.$name.'.png', $data);
     <div class="info-div">
       <div class="info-text">
         <p>You can find your video at: <br>
-          <span>uglynet.io/collect.html</span>
+          <span>uglynet.io/collect</span>
         </p>
         <p>Code:<br>
           <span id="code">
