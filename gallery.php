@@ -1,12 +1,13 @@
 
 <?php
-//$VideoArr = array_reverse(glob("Result/*.png"));
-$VideoArr = glob("Result/*.png");
-sort($VideoArr);
+$VideoArr = array_reverse(glob("Result/*.png"));
+//$VideoArr = glob("Result/*.png");
+//sort($VideoArr);
 #var_dump($VideoArr);
 if (!isset($_GET['id'])){
   $_GET['id'] = 1;
 }
+
 //var_dump($VideoArr);
 ?>
 
@@ -41,30 +42,32 @@ if (!isset($_GET['id'])){
 
     <div class="thumbnails row text-center text-lg-left">
     
-      <?php
-      for($i = 0; $i<count($VideoArr);$i++){
-        //echo $VideoArr[$i];
-    //      echo '<br>';
-        $NameList = explode('_',$VideoArr[$i]); //echo $NameList[0];      echo '<br>';
-        $NameList = explode("/",$NameList[0]);
-        //var_dump($NameList);
-
-        echo '<div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
-        <div class="d-block mb-4 h-100">
-        <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Result/'.$NameList[1].'.mp4#t=0.01" type="video/mp4"></video>
-        <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
-        <img class="unet img-fluid img-thumbnail" src="'.$VideoArr[$i].'" alt="">
-        </div></div>';
-
-
-    //      echo $NameList[1];
-      }
-      ?>
+    
+    <?php
+    for($i=($_GET['id']-1)*6; $i<($_GET['id']-1)*6+6 && $i<count($VideoArr);$i++) {
+      #for($i = 0; $i<count($VideoArr);$i++){
+      $NameList = explode('_',$VideoArr[$i]); //echo $NameList[0];      echo '<br>';
+      $NameList = explode("/",$NameList[0]);
+      echo '<div class="w3-container w3-third work col-lg-4 col-md-6 col-12">
+      <div class="d-block mb-4 h-100">
+      <video class="thumbnail img-fluid img-thumbnail" preload="metadata" muted><source src="Result/'.$NameList[1].'.mp4" type="video/mp4"></video>
+      <label class="vid-pane img-fluid" alt="" onclick="onClick(this)"></label>
+      <img class="unet img-fluid img-thumbnail" src="'.$VideoArr[$i].'" alt="">
+      </div></div>';
+    }
+    ?>
+            
     </div>
+    
 
     <div>
-      <button class="arrow-button" style="margin-right: 40px"><img class="arrow-img" src="img/left-arrow.png"></button>
-      <button class="arrow-button" style="margin-left: 40px"><img class="arrow-img" src="img/right-arrow.png"></button>  
+    <?php
+      $Next = min($_GET['id'] + 1, (int)(count($VideoArr)/6) + 1);
+      $Pre = max($_GET['id'] - 1, 1);
+      echo '<button class="arrow-button" style="margin-right: 40px" onclick="location.href=\'gallery.php?id='.$Pre.'\'" ><img class="arrow-img" src="img/left-arrow.png"></button>'; 
+      echo '<button class="arrow-button" style="margin-left: 40px" onclick="location.href=\'gallery2rphp?id='.$Next.'\'" ><img class="arrow-img" src="img/right-arrow.png"></button>'; 
+      ?>
+
     </div>
 
     <div id="modal-div" class="w3-modal gallery-modal" onclick="modalOnClick(this)">
