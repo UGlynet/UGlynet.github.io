@@ -95,7 +95,7 @@ p {
   width: 60px;
   height: 60px;
   background: none;
-  overflow:hidden;
+  /*overflow:hidden;*/
   border: none;
   margin-top: 50px;
   margin-bottom: 40px;
@@ -229,7 +229,7 @@ p {
   top: 0;
   left: 0;
   object-fit: cover;
-  /*border: 0.2em solid #000;*/
+  border: 0.2em solid #000;
 }
 
 .unet
