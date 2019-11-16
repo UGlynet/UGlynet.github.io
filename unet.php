@@ -123,9 +123,9 @@
         var img_input = document.getElementById("canvas-image").src = data_url;
         img_input.name = name;
         sessionStorage.data_url = data_url;
-        document.getElementById("temp").href=data_url;
+        //document.getElementById("temp").href=data_url;
         document.getElementById('thumb').value = data_url;
-        //document.getElementById('videonum').value = <?php echo $_GET['id'];?>;
+        document.getElementById('videonum').value = '<?php echo $_GET['id'];?>';
         document.getElementById("ugly-values").submit();
       }
 
