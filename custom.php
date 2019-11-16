@@ -59,7 +59,7 @@ $UserID = $_GET['id'];
   <?php
   echo '
   <form method="get" action="Result/'.$UserID.'.mp4" class="button-div">
-    <button type="submit" class="centered-button next-btn-on"><i>Download</i></button>
+    <button type="submit" class="centered-button next-btn-on video-btn"><i>Download</i></button>
   </form>';
   ?>
 </body>
