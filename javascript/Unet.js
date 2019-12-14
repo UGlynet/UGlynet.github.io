@@ -12,14 +12,14 @@ class Unet {
 		this.default_strokeWgt = 8;
 		// this.h = 6.7*U_SCALE - y_upper_end;
 
-		this.encoder_traits = [[-4.2*U_SCALE,-4.2*U_SCALE, 1.25*U_SCALE, "인코더의 첫 번째 레이어", 8, true],
+		this.encoder_traits = [[-4.2*U_SCALE,-4.2*U_SCALE, 1.25*U_SCALE, "1st Layer of the Encoder", 8, true],
 								  [-4.8*U_SCALE, -1.2*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [-4.62*U_SCALE, 0.7*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [-4.32*U_SCALE, 2.52*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [-3.28*U_SCALE, 3.96*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [0, 5*U_SCALE, 1.3*U_SCALE, "", 8, false]];
 
-		this.decoder_traits = [[4.2*U_SCALE,-4.2*U_SCALE, 1.25*U_SCALE, "디코더의 마지막 레이어", 8, true],
+		this.decoder_traits = [[4.2*U_SCALE,-4.2*U_SCALE, 1.25*U_SCALE, "Last Layer of the Decoder", 8, true],
 								  [4.8*U_SCALE, -1.2*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [4.62*U_SCALE, 0.7*U_SCALE, 0.25*U_SCALE, "", 8, false],
 								  [4.32*U_SCALE, 2.52*U_SCALE, 0.25*U_SCALE, "", 8, false],

@@ -18,8 +18,8 @@ class Latent {
 			options: operations,
 			val: 50,
 		}
-		let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
-		this.controller = createGui(window, "비디오 프레임이 응축된 Bottleneck 레이어", "QuickSettings");
+		let controller_labeltexts = ["Which Operation?", "How Much?"];
+		this.controller = createGui(window, "Bottleneck Layer", "QuickSettings");
 		this.controller.addObject(this.controller_options, controller_labeltexts);
 		controller_options.push(this.controller_options);
 		controllers.push(this.controller);

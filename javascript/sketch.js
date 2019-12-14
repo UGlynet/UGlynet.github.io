@@ -33,8 +33,8 @@ var myColor = '#eeee00';
 var hue_palette = [60, 0, 120, 240, 300, 360];
 // var operations = ['preserve original', 'add', 'multiply', 'substitute (all)', 'substitute (width vector)', 'substitute (height vector)'];
 // var operations_skpcn = ['preserve', 'cut off', 'add', 'multiply'];
-var operations = ['원본대로', '더하기', '곱하기', '전체화면에서 빼기'];
-var operations_skpcn = ['원본대로', '자르기', '더하기', '곱하기'];
+var operations = ['Preserve the Original', 'Add', 'Multiply', 'Subtract'];
+var operations_skpcn = ['Preserve the Original', 'Cut Off', 'Add', 'Multiply'];
 var background_params = {
   red_channel: 200,
   green_channel: 200,
@@ -75,10 +75,10 @@ function setup() {
   strokeJoin(ROUND);
 
   // background controller
-  let controller_labeltexts = ["빨간색", "초록색", "파란색"];
+  let controller_labeltexts = ["Red", "Green", "Blue"];
   document.body.style.backgroundColor = myColor;
   sliderRange(0, 200, 1);
-  background_controller = createGui('비디오의 필터 색깔을 정해주세요');
+  background_controller = createGui('Choose Your Video\'s Tone!');
   background_controller.addObject(background_params, controller_labeltexts);
   background_controller.on = false;
   controllers.push(background_controller);

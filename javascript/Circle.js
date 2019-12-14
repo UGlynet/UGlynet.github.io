@@ -25,7 +25,7 @@ class Circle {
 				options: operations,
 				val: 50
 			}
-			let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
+			let controller_labeltexts = ["Which Operation?", "How Much?"];
 			this.controller = createGui(window, name, "QuickSettings");
 			this.controller.addObject(this.controller_options, controller_labeltexts);
 			controller_options.push(this.controller_options);

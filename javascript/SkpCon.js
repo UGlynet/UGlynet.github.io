@@ -24,8 +24,8 @@ class SkpCon {
 			options: operations_skpcn,
 			val: 100
 		}
-		let controller_labeltexts = ["어떻게 바꿀까요?", "얼마나 바꿀까요?"];
-		this.controller = createGui(window, "원본 프레임의 모습을 그대로 전달하는 Skip Connection", "QuickSettings");
+		let controller_labeltexts = ["Which Operation?", "How Much?"];
+		this.controller = createGui(window, "Skip Connection", "QuickSettings");
 		this.controller.addObject(this.controller_options, controller_labeltexts);
 		this.controller.setValue('options', Math.floor(Math.random()*operations_skpcn.length));
 		controllers.push(this.controller);
