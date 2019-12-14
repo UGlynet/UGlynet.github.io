@@ -1,7 +1,11 @@
 
 <?php
-$VideoArr = glob("Result/*.png");
-//$VideoArr = array_reverse(glob("Result/*.png"));
+//$VideoArr = glob("Result/*.png");
+$VideoArr = array_reverse(glob("Result/*.png"));
+if (!isset($_GET['id'])){
+  $_GET['id'] = 1;
+}
+
 //var_dump($VideoArr);
 ?>
 
