@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <title>UGly-Net</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="css/business-casual.css" rel="stylesheet">  
+
+    <script src="./libraries/jquery-3.4.1.slim.min.js"></script>
+    <script src="./libraries/p5.min.js"></script>
+    <script src="./libraries/dat.gui.js"></script>
+    <script src="./libraries/p5.dom.js"></script>
+    <script src="./libraries/p5.gui.js"></script>
+    <script src="./libraries/p5.sound.js"></script>
+    <script src="./libraries/quicksettings.js"></script>
+  </head>
+
+  <body>
+    <div id="title_div">
+      <h1 id="title" align="center">UGly-Net</h1>
+      <!-- <a href="" id="temp" download>Download</a> -->
+      <div id="subtitle"></div>
+    </div>
+
+    <div id='main_div' align="center"> 
+    </div>
+
+    <div id='unet_values'>
+      <!-- TODO: adopt for backend logic -->
+      <form action="info.php" method="post" name="ugly-values" id="ugly-values">
+        <input id="est-latent-opt" class="f-map ugly-val" type="text" name="est-latent-opt" value="0">
+        <input id="est-latent-val" class="f-map ugly-val" type="text" name="est-latent-val" value="0">
+        <input id="est-skip-opt" class="f-map ugly-val" type="text" name="est-skip-opt" value="0">
+        <input id="est-skip-val" class="f-map ugly-val" type="text" name="est-skip-val" value="0">
+        <input id="est-encoder-opt" class="f-map ugly-val" type="text" name="est-encoder-opt" value="0">
+        <input id="est-encoder-val" class="f-map ugly-val" type="text" name="est-encoder-val" value="0">
+        <input id="est-decoder-opt" class="f-map ugly-val" type="text" name="est-decoder-opt" value="0">
+        <input id="est-decoder-val" class="f-map ugly-val" type="text" name="est-decoder-val" value="0">
+        <input id="intp-latent-opt" class="f-map ugly-val" type="text" name="intp-latent-opt" value="0">
+        <input id="intp-latent-val" class="f-map ugly-val" type="text" name="intp-latent-val" value="0">
+        <input id="intp-skip-opt" class="f-map ugly-val" type="text" name="intp-skip-opt" value="0">
+        <input id="intp-skip-val" class="f-map ugly-val" type="text" name="intp-skip-val" value="0">
+        <input id="intp-encoder-opt" class="f-map ugly-val" type="text" name="intp-encoder-opt" value="0">
+        <input id="intp-encoder-val" class="f-map ugly-val" type="text" name="intp-encoder-val" value="0">
+        <input id="intp-decoder-opt" class="f-map ugly-val" type="text" name="intp-decoder-opt" value="0">
+        <input id="intp-decoder-val" class="f-map ugly-val" type="text" name="intp-decoder-val" value="0">
+        <input id="r-val" class="tone ugly-val" type="text" name="r-val" value="0">
+        <input id="g-val" class="tone ugly-val" type="text" name="g-val" value="0">                        
+        <input id="b-val" class="tone ugly-val" type="text" name="b-val" value="0">
+        <input id="canvas-image" class = "ugly-val" type="file" name="canvas-image" value="0">
+        <input id="thumb" class="f-map ugly-val" type="text" name="thumb" value="0">
+        <input id="code" class="f-map ugly-val" type="text" name="code" value="0">
+        <input id="videonum" class="f-map ugly-val" type="text" name="videonum" value="<?php echo $_GET['id'];?>">
+      </form>
+    </div>
+
+    <button onclick="buttonOnClick()" class="custom-button video-btn" style="z-index:5"><i>Make Video</i></button>
+
+    <script src="./javascript/sketch.js"></script>
+    <script src="./javascript/Unet.js"></script>
+    <script src="./javascript/Encoder.js"></script>
+    <script src="./javascript/Decoder.js"></script>
+    <script src="./javascript/Circle.js"></script>
+    <script src="./javascript/SkpCon.js"></script>
+    <script src="./javascript/Latent.js"></script>
+    <script>
+      function zeroPad(num, places) {
+          return String(num).padStart(places, '0')
+      }
+      function buttonOnClick() {
+        // generate unique name for the result
+        let d = new Date();
+        let name = "" + d.getDate() + "-" + zeroPad(d.getHours(),2) + zeroPad(d.getMinutes(),2) +"-" + zeroPad(Math.floor(d.getMilliseconds()/10),3);
+        sessionStorage.name = name;
+        document.getElementById('code').value = name;
+
+        // put file into input
+        var hidden_canv = document.createElement('canvas');
+        hidden_canv.style.display = 'none';
+        document.body.appendChild(hidden_canv);
+
+        // (1) Original
+        // hidden_canv.width = w*2-U1_OFFSET_X;
+        // hidden_canv.height = h+60;
+        // var hidden_ctx = hidden_canv.getContext('2d');
+
+        // hidden_ctx.drawImage(
+        //     cnv.canvas,   
+        //     U1_OFFSET_X/2, // startClippingX,
+        //     U1_OFFSET_Y+100, // startClippingY,
+        //     hidden_canv.width, //clippingWidth
+        //     hidden_canv.height, //clippingHeight
+        //     0,
+        //     0,
+        //     hidden_canv.width,
+        //     hidden_canv.height
+        // );
+
+        // (2) Trial
+        hidden_canv.width = window.innerWidth;
+        hidden_canv.height = window.innerHeight*1.1;
+        var hidden_ctx = hidden_canv.getContext('2d');
+
+        hidden_ctx.drawImage(
+            cnv.canvas,   
+            0, // startClippingX,
+            U1_OFFSET_Y*0.8, // startClippingY,
+            cnv.canvas.width, //clippingWidth
+            cnv.canvas.height, //clippingHeight
+            0,
+            0,
+            hidden_canv.width,
+            hidden_canv.height   
+        );
+
+        var data_url = hidden_canv.toDataURL("image/png");
+        var img_input = document.getElementById("canvas-image").src = data_url;
+        img_input.name = name;
+        sessionStorage.data_url = data_url;
+        //document.getElementById("temp").href=data_url;
+        document.getElementById('thumb').value = data_url;
+        console.log(data_url);
+        // document.getElementById('videonum').value = '<?php echo $_GET['id'];?>';
+        // document.getElementById("ugly-values").submit();
+      }
+
+      function setChangeValue(element) {
+        var controller_idx = controller_panes.indexOf(element);
+        var select_val = $('.qs_select')[controller_idx].selectedIndex;
+        var range_val = $('.qs_range')[controller_idx].value; 
+        var inputs = $('.f-map'); 
+        inputs[controller_idx*2].setAttribute('value', select_val)
+        inputs[controller_idx*2+1].setAttribute('value', range_val)
+        //inputs[controller_idx*2].value = select_val;
+        //inputs[controller_idx*2+1].value = range_val;
+      }
+
+      function setBackgroundValue() {
+        // Set background color according to unet filter
+        var params = [background_params.red_channel,
+                      background_params.green_channel,
+                      background_params.blue_channel];
+        var rgbs = params.map(multiplierToRgb);
+
+        background_color_string = toRgbString(rgbs[0], rgbs[1], rgbs[2]);
+        document.body.style.backgroundColor = background_color_string;
+
+        // Set input value
+        let inputs = document.getElementsByClassName("tone");
+        for (let i=0; i<3; i++) {
+          inputs[i].value = params[i];
+        };
+      };
+    </script>
+  </body>
+
+</html>
